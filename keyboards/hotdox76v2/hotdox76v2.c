@@ -1,5 +1,6 @@
 // Copyright 2021 JasonRen(biu)
 // Copyright 2022 Drashna Jael're (@Drashna Jael're)
+// Copyright 2024 Sebastian Echeverry (uno-sebastian)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "hotdox76v2.h"
@@ -128,16 +129,16 @@ void render_layer_helper_fun(uint8_t start_line, const char *data, uint8_t gap_w
     }
 }
 void render_layer(uint8_t layer) {
-    render_layer_helper_fun(0, PSTR("LAYER:"), 12, 6);
+    render_layer_helper_fun(0, PSTR("Layer:"), 12, 6);
     switch (layer) {
         case 0:
-            render_layer_helper_fun(1, PSTR("1:HOME"), 12, 6);
+            render_layer_helper_fun(1, PSTR("0:Code"), 12, 6);
             break;
         case 1:
-            render_layer_helper_fun(1, PSTR("2:CODE"), 12, 6);
+            render_layer_helper_fun(1, PSTR("1:NumPad"), 0, 8);
             break;
         case 2:
-            render_layer_helper_fun(1, PSTR("3:OFFICE"), 0, 8);
+            render_layer_helper_fun(1, PSTR("2:FnKeys"), 0, 8);
             break;
         case 3:
         default:
@@ -164,15 +165,15 @@ void render_cur_input_helper_fun(uint8_t start_line, const char *data, uint8_t g
     }
 }
 
-void render_cur_input(void) {
-    render_cur_input_helper_fun(0, "INPUTS:", 6, 7);
-    if (is_keyboard_master()) {
-        render_cur_input_helper_fun(1, (const char *)(m2s.current_alp), 12, 6);
-    } else {
-        render_cur_input_helper_fun(1, (const char *)(s2m.current_alp), 12, 6);
-    }
-    return;
-}
+// void render_cur_input(void) {
+//     render_cur_input_helper_fun(0, "Inputs:", 6, 7);
+//     if (is_keyboard_master()) {
+//         render_cur_input_helper_fun(1, (const char *)(m2s.current_alp), 12, 6);
+//     } else {
+//         render_cur_input_helper_fun(1, (const char *)(s2m.current_alp), 12, 6);
+//     }
+//     return;
+// }
 
 bool oled_task_kb(void) {
     if (!oled_task_user()) {
@@ -182,9 +183,17 @@ bool oled_task_kb(void) {
     if (is_keyboard_left()) {
         render_layer(biton32(layer_state));
     } else {
-        render_cur_input();
+        // replaced bec of not wanting passwords visible when typing them :P
+        // render_cur_input();
+        render_cur_input_helper_fun(0, "NumLock:", 6, 7);
+        if(host_keyboard_led_state().num_lock){
+            render_cur_input_helper_fun(1, "ON ", 6, 3);
+        } else {
+            render_cur_input_helper_fun(1, "OFF", 6, 3);
+        }
     }
     return false;
+
 }
 
 static const char PROGMEM code_to_name[0xFF] = {
