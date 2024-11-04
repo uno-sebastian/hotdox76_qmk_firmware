@@ -1,3 +1,5 @@
+// Copyright 2021 JasonRen(biu)
+// Copyright 2022 Drashna Jael're (@Drashna Jael're)
 // Copyright 2024 Uno-Sebastian
 // SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -26,7 +28,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ├──────┼───┼───┼───┼───┼───┤   │                     │   ├───┼───┼───┼───┼───┼──────┤
      * │Shift │ Z │ X │ C │ V │ B │T2 │                     │T1 │ N │ M │ , │ . │ / │ Shift│
      * └──┬───┼───┼───┼───┼───┼───┴───┘ ┌───┬───┐ ┌───┬───┐ └───┴───┼───┼───┼───┼───┼───┬──┘
-     *    │Ctl│GUI│Alt│ ← │ → │         │   │Ins│ │Alt│Src│         │ ↓ │ ↑ │ [ │ ] │Ctl│+
+     *    │Ctl│GUI│Alt│ ← │ → │         │   │Ins│ │Alt│Src│         │ ↓ │ ↑ │ [ │ ] │Ctl│
      *    └───┴───┴───┴───┴───┘     ┌───┼───┼───┤ ├───┼───┼───┐     └───┴───┴───┴───┴───┘
      *                              │   │   │End│ │PgU│   │   │
      *                              │Spc│   ├───┤ ├───┤Tab│Ent│
@@ -64,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,            KC_TRNS,    KC_NO,   KC_NUM,  KC_PSLS, KC_PAST, KC_PMNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,            KC_TRNS,    KC_NO,   KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_NO,   KC_P4,   KC_P5,   KC_P6,   KC_EQUAL,KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_QWERTY),        KC_NO,      KC_NO,   KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, TO(_QWERTY),        TO(_QWERTY),KC_NO,   KC_P1,   KC_P2,   KC_P3,   KC_PENT, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                                   KC_P0,   KC_P0,   KC_DEL,  KC_PENT, KC_TRNS,
                                                      KC_TRNS, KC_TRNS,            KC_TRNS,    KC_TRNS,
                                                               KC_TRNS,            KC_TRNS,   
@@ -91,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_TRNS,            KC_TRNS,    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
         KC_TRNS, KC_F11,  KC_F12,  KC_F13,  KC_F14,  KC_F15,  KC_TRNS,            KC_TRNS,    KC_F16,  KC_F17,  KC_F18,  KC_F19,  KC_F20,  KC_TRNS,
         KC_TRNS, KC_F21,  KC_F22,  KC_F23,  KC_F24,  KC_NO,                                   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TRNS,
-        KC_LSFT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,              TO(_QWERTY),KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_RSFT,
+        KC_LSFT, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   TO(_QWERTY),        TO(_QWERTY),KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_RSFT,
         KC_LCTL, KC_LGUI, KC_LALT, KC_LEFT, KC_RIGHT,                                                  KC_DOWN, KC_UP,   KC_RALT, KC_RGUI, KC_RCTL,
                                                      KC_PSCR, KC_TRNS,            KC_TRNS,    KC_TRNS,
                                                               KC_TRNS,            KC_TRNS, 
@@ -114,7 +116,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
                 break;
             default:
                 rgb_matrix_set_color(i, RGB_BLUE);
-                // if u want to see all the nice colors
+                //
                 // if (i == 1) { rgb_matrix_set_color(i, RGB_AZURE);}
                 // if (i == 2) { rgb_matrix_set_color(i, RGB_OFF);}
                 // if (i == 3) { rgb_matrix_set_color(i, RGB_BLUE);}
